@@ -884,7 +884,7 @@ void launch_fattn(
     }
 
     const int ntiles_x = ((Q->ne[1] + ncols1 - 1) / ncols1);
-    const int ntiles_z =  ((Q->ne[2] + ncols2 - 1) / ncols2);
+    const int ntiles_z = ((Q->ne[2] + ncols2 - 1) / ncols2);
     const int ntiles_total = ntiles_x * ntiles_z * Q->ne[3];
 
     // Optional optimization where the mask is scanned to determine whether part of the calculation can be skipped.
