@@ -290,27 +290,27 @@ void main() {
                 if (idx + tid < Bc * Br / 4 || idx + gl_WorkGroupSize.x <= Bc * Br / 4) {
                     if (!KV_bounds_check || j * Bc + c < KV) {
                         if (!nem1_bounds_check || i * Br + r * 4 + 3 < p.nem1) {
-                            ACC_TYPEV4 masks = ACC_TYPEV4(mask_cache[idx / WorkGroupSize]);
-                            ACC_TYPEV4 slopes = ACC_TYPEV4(slope[r * 4], slope[r * 4 + 1], slope[r * 4 + 2], slope[r * 4 + 3]);
-                            sfsh[c * sfshstride + r] += slopes * masks;
+                            vec4 masks = vec4(mask_cache[idx / WorkGroupSize]);
+                            vec4 slopes = vec4(slope[r * 4], slope[r * 4 + 1], slope[r * 4 + 2], slope[r * 4 + 3]);
+                            sfsh[c * sfshstride + r] += ACC_TYPEV4(slopes * masks);
                         } else if (i * Br + r * 4 + 2 < p.nem1) {
-                            ACC_TYPEV4 masks = ACC_TYPEV4(mask_cache[idx / WorkGroupSize]);
-                            masks.w = ACC_TYPE(0.0f);
-                            ACC_TYPEV4 slopes = ACC_TYPEV4(slope[r * 4], slope[r * 4 + 1], slope[r * 4 + 2], slope[r * 4 + 3]);
-                            sfsh[c * sfshstride + r] += slopes * masks;
+                            vec4 masks = vec4(mask_cache[idx / WorkGroupSize]);
+                            masks.w = float(0.0f);
+                            vec4 slopes = vec4(slope[r * 4], slope[r * 4 + 1], slope[r * 4 + 2], slope[r * 4 + 3]);
+                            sfsh[c * sfshstride + r] += ACC_TYPEV4(slopes * masks);
                         } else if (i * Br + r * 4 + 1 < p.nem1) {
-                            ACC_TYPEV4 masks = ACC_TYPEV4(mask_cache[idx / WorkGroupSize]);
-                            masks.z = ACC_TYPE(0.0f);
-                            masks.w = ACC_TYPE(0.0f);
-                            ACC_TYPEV4 slopes = ACC_TYPEV4(slope[r * 4], slope[r * 4 + 1], slope[r * 4 + 2], slope[r * 4 + 3]);
-                            sfsh[c * sfshstride + r] += slopes * masks;
+                            vec4 masks = vec4(mask_cache[idx / WorkGroupSize]);
+                            masks.z = float(0.0f);
+                            masks.w = float(0.0f);
+                            vec4 slopes = vec4(slope[r * 4], slope[r * 4 + 1], slope[r * 4 + 2], slope[r * 4 + 3]);
+                            sfsh[c * sfshstride + r] += ACC_TYPEV4(slopes * masks);
                         } else if (i * Br + r * 4 < p.nem1) {
-                            ACC_TYPEV4 masks = ACC_TYPEV4(mask_cache[idx / WorkGroupSize]);
-                            masks.y = ACC_TYPE(0.0f);
-                            masks.z = ACC_TYPE(0.0f);
-                            masks.w = ACC_TYPE(0.0f);
-                            ACC_TYPEV4 slopes = ACC_TYPEV4(slope[r * 4], slope[r * 4 + 1], slope[r * 4 + 2], slope[r * 4 + 3]);
-                            sfsh[c * sfshstride + r] += slopes * masks;
+                            vec4 masks = vec4(mask_cache[idx / WorkGroupSize]);
+                            masks.y = float(0.0f);
+                            masks.z = float(0.0f);
+                            masks.w = float(0.0f);
+                            vec4 slopes = vec4(slope[r * 4], slope[r * 4 + 1], slope[r * 4 + 2], slope[r * 4 + 3]);
+                            sfsh[c * sfshstride + r] += ACC_TYPEV4(slopes * masks);
                         }
                     }
                 }
